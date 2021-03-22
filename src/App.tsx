@@ -1,5 +1,4 @@
 import { BrowserRouter as Router } from 'react-router-dom';
-import { RefactorActionInfo } from 'typescript';
 
 import Routes from './routes';
 

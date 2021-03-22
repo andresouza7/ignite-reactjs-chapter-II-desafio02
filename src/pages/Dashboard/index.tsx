@@ -6,19 +6,11 @@ import Food from '../../components/Food';
 import ModalAddFood from '../../components/ModalAddFood';
 import ModalEditFood from '../../components/ModalEditFood';
 import { FoodsContainer } from './styles';
-
-interface FoodProps {
-  id: number;
-  name: string;
-  description: string;
-  price: string;
-  available: boolean;
-  image: string;
-}
+import { FoodFormProps, FoodType } from '../../types/FoodType';
 
 const Dashboard = (): JSX.Element => {
-  const [foods, setFoods] = useState<FoodProps[]>([])
-  const [editingFood, setEditingFood] = useState<FoodProps>({} as FoodProps)
+  const [foods, setFoods] = useState<FoodType[]>([])
+  const [editingFood, setEditingFood] = useState<FoodType>({} as FoodType)
   const [modalOpen, setModalOpen] = useState(false)
   const [editModalOpen, setEditModalOpen] = useState(false)
 
@@ -29,7 +21,7 @@ const Dashboard = (): JSX.Element => {
       })
   }, [])
 
-  const handleAddFood = async (food: FoodProps) => {
+  const handleAddFood = async (food: FoodFormProps) => {
     try {
       const response = await api.post('/foods', {
         ...food,
@@ -42,7 +34,7 @@ const Dashboard = (): JSX.Element => {
     }
   }
 
-  const handleUpdateFood = async (food: FoodProps) => {
+  const handleUpdateFood = async (food: FoodFormProps) => {
     try {
       const foodUpdated = await api.put(
         `/foods/${editingFood.id}`,
@@ -75,7 +67,7 @@ const Dashboard = (): JSX.Element => {
     setEditModalOpen(!editModalOpen)
   }
 
-  const handleEditFood = (food: FoodProps) => {
+  const handleEditFood = (food: FoodType) => {
     setEditingFood(food)
     setEditModalOpen(true)
   }
